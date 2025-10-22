@@ -1,13 +1,10 @@
 name: Generate Snake
 
-# Controls when the action will run
 on:
   schedule:
     # Run every 12 hours
     - cron: "0 */12 * * *"
-  # Allow manual trigger from Actions tab
   workflow_dispatch:
-  # Run on push to main branch
   push:
     branches:
       - main
@@ -15,13 +12,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Grant write access to repository contents
 
     steps:
       # Checkout the repository
       - name: Clone repo
         uses: actions/checkout@v4
 
-      # Generate snake animation with custom Dark Moon Grey palette
+      # Generate snake animation with Dark Moon Grey palette
       - name: Generate the snake
         uses: Platane/snk@v3
         id: snake-gif
